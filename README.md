@@ -152,4 +152,4 @@ java com.foodapp.Main
 
 ## Author
 
-Student Project for learning Java OOP and system design
+Developed as a coursework project for Object-Oriented Programming Lab(SE217) under the supervision of Quazi Fariha Fairooz Mam.

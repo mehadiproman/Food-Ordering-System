@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is a console-based Food Ordering System built using Java. The project demonstrates core Object-Oriented Programming (OOP) principles including Abstraction, Encapsulation, Inheritance, and Polymorphism.
+This is a console-based Food Ordering System built using Java. The project demonstrates core Object-Oriented Programming (OOP) principles, including Abstraction, Encapsulation, Inheritance, and Polymorphism.
 
 Users can register as customers, browse food items, place orders, and view order summaries with calculated bills.
 
@@ -59,7 +59,7 @@ FoodOrderingSystem/
 ### Abstraction
 
 * `FoodItem` is an abstract class
-* Defines common structure for all food types
+* Defines a common structure for all food types
 
 ### Encapsulation
 
@@ -81,7 +81,7 @@ FoodOrderingSystem/
 
 ## How to Run (CLI)
 
-### Step 1: Navigate to project
+### Step 1: Navigate to the project
 
 ```
 cd FoodOrderingSystem/src
@@ -103,7 +103,7 @@ java com.foodapp.Main
 
 ## How to Run (IntelliJ)
 
-1. Open project in IntelliJ
+1. Open the project in IntelliJ
 2. Ensure JDK is configured (Java 11 or higher)
 3. Right-click `Main.java`
 4. Click "Run Main"
@@ -115,7 +115,7 @@ java com.foodapp.Main
 1. Register a new customer
 2. View menu items
 3. Select items and quantities
-4. Place order
+4. Place an order
 5. View order summary with bill
 
 ---
@@ -126,12 +126,12 @@ java com.foodapp.Main
 * `Burger`, `Pizza`, `Drink` - Specific food types
 * `Customer` - Stores customer information
 * `Order` - Manages items and bill calculation
-* `OrderItem` - Represents item with quantity
+* `OrderItem` - Represents an item with quantity
 * `Menu` - Displays and manages food items
 * `CustomerRegistry` - Handles customer registration
 * `OrderHistory` - Tracks all orders
 * `FoodOrderingSystem` - Main controller
-* `Main` - Entry point
+* `Main` - The entry point
 
 ---
 

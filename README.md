@@ -152,4 +152,5 @@ java com.foodapp.Main
 
 ## Author
 
-Developed as a coursework project for Object-Oriented Programming Lab(SE217) under the supervision of Quazi Fariha Fairooz Mam.
+Developed as a coursework project for the Object-Oriented Programming Lab (SE217) under the supervision of 
+Quazi Fariha Fairooz Mam.

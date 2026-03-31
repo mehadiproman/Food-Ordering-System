@@ -43,7 +43,7 @@ public class Order {
 
     public void addItem(FoodItem foodItem, int quantity) {
         if (quantity <= 0) {
-            throw new IllegalArgumentException("Quantity must be greater than 0");
+            throw new IllegalArgumentException("Quantity must be greater than 0 or more");
         }
         items.add(new OrderItem(foodItem, quantity));
     }

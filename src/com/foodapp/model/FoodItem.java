@@ -1,52 +1,53 @@
+package com.foodapp.model;
+
 /**
- * Abstract base class for all food items
- * ABSTRACTION: Defines common structure for all food types
- * ENCAPSULATION: Encapsulates food properties with private fields and public getters
+ * Abstract base class for all food items (Abstraction, Encapsulation)
+ * Centralizes currency configuration and formatting.
  */
 public abstract class FoodItem {
-    private int itemId;
-    private String name;
-    private double price;
+    public static final String CURRENCY = "BDT";
 
-    /**
-     * Constructor for FoodItem
-     */
+    private final int itemId;
+    private final String name;
+    private final double price;
+
+    // Constructor to initialize common food properties
     public FoodItem(int itemId, String name, double price) {
         this.itemId = itemId;
         this.name = name;
         this.price = price;
     }
 
-    // Getters (Encapsulation - controlled access to private fields)
+    // Static helper for consistent currency formatting across the project
+    public static String formatPrice(double amount) {
+        return String.format("%s %.2f", CURRENCY, amount);
+    }
+
+    // Get item ID
     public int getItemId() {
         return itemId;
     }
 
+    // Get item name
     public String getName() {
         return name;
     }
 
+    // Get item price
     public double getPrice() {
         return price;
     }
 
-    /**
-     * Abstract method to get detailed description
-     * ABSTRACTION: Each subclass must implement this
-     */
+    // Abstract method for item description (must be implemented by subclasses)
     public abstract String getDescription();
 
-    /**
-     * Abstract method to validate item
-     * ABSTRACTION: Each subclass defines its own validation
-     */
+    // Abstract method for validation (must be implemented by subclasses)
     public abstract boolean isValid();
 
-    /**
-     * Returns a string representation of the food item
-     */
+    // String representation of food item
     @Override
     public String toString() {
-        return String.format("ID: %d | Name: %s | Price: Rs.%.2f", itemId, name, price);
+        return String.format("ID: %d | Name: %s | Price: %s", 
+                itemId, name, formatPrice(price));
     }
 }

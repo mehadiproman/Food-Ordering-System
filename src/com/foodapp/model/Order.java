@@ -1,24 +1,22 @@
+package com.foodapp.model;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Order class representing a customer's order
- * ENCAPSULATION: Encapsulates order details with private fields
- * Manages order items and bill calculation
+ * Order class manages a collection of OrderItems for a Customer.
+ * Handles tax calculations and order summary generation.
  */
 public class Order {
-    private int orderId;
-    private Customer customer;
-    private List<OrderItem> items;
-    private LocalDateTime orderTime;
-    private double taxRate; // e.g., 0.10 for 10% tax
+    private final int orderId;
+    private final Customer customer;
+    private final List<OrderItem> items;
+    private final LocalDateTime orderTime;
+    private final double taxRate;
     private static final double DEFAULT_TAX_RATE = 0.10;
 
-    /**
-     * Constructor for Order
-     */
     public Order(int orderId, Customer customer) {
         this.orderId = orderId;
         this.customer = customer;
@@ -27,7 +25,6 @@ public class Order {
         this.taxRate = DEFAULT_TAX_RATE;
     }
 
-    // Getters
     public int getOrderId() {
         return orderId;
     }
@@ -44,9 +41,6 @@ public class Order {
         return orderTime;
     }
 
-    /**
-     * Adds a food item to the order
-     */
     public void addItem(FoodItem foodItem, int quantity) {
         if (quantity <= 0) {
             throw new IllegalArgumentException("Quantity must be greater than 0");
@@ -54,56 +48,41 @@ public class Order {
         items.add(new OrderItem(foodItem, quantity));
     }
 
-    /**
-     * Removes an item from the order by index
-     */
     public void removeItem(int index) {
         if (index >= 0 && index < items.size()) {
             items.remove(index);
         }
     }
 
-    /**
-     * Calculates subtotal (sum of all item prices before tax)
-     */
     public double getSubtotal() {
         return items.stream()
                 .mapToDouble(OrderItem::getSubtotal)
                 .sum();
     }
 
-    /**
-     * Calculates tax amount
-     */
     public double getTaxAmount() {
         return getSubtotal() * taxRate;
     }
 
-    /**
-     * Calculates total bill including tax
-     */
     public double getTotal() {
         return getSubtotal() + getTaxAmount();
     }
 
-    /**
-     * Checks if order is valid (has at least one item)
-     */
     public boolean isValid() {
         return !items.isEmpty();
     }
 
-    /**
-     * Returns a complete order summary
-     */
     public String getOrderSummary() {
         StringBuilder summary = new StringBuilder();
+
         summary.append("========================================\n");
         summary.append("             ORDER SUMMARY\n");
         summary.append("========================================\n");
+
         summary.append(String.format("Order ID: %d\n", orderId));
         summary.append(String.format("Order Time: %s\n",
                 orderTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))));
+
         summary.append("\nCustomer Details:\n");
         summary.append(String.format("Name: %s\n", customer.getName()));
         summary.append(String.format("Email: %s\n", customer.getEmail()));
@@ -113,6 +92,7 @@ public class Order {
         summary.append("\n----------------------------------------\n");
         summary.append("Items Ordered:\n");
         summary.append("----------------------------------------\n");
+
         for (int i = 0; i < items.size(); i++) {
             summary.append(String.format("%d. %s\n", i + 1, items.get(i)));
         }
@@ -120,9 +100,11 @@ public class Order {
         summary.append("\n----------------------------------------\n");
         summary.append("Bill Details:\n");
         summary.append("----------------------------------------\n");
-        summary.append(String.format("Subtotal: Rs.%.2f\n", getSubtotal()));
-        summary.append(String.format("Tax (%.0f%%): Rs.%.2f\n", taxRate * 100, getTaxAmount()));
-        summary.append(String.format("TOTAL: Rs.%.2f\n", getTotal()));
+
+        summary.append(String.format("Subtotal: %s\n", FoodItem.formatPrice(getSubtotal())));
+        summary.append(String.format("Tax (%.0f%%): %s\n", taxRate * 100, FoodItem.formatPrice(getTaxAmount())));
+        summary.append(String.format("TOTAL: %s\n", FoodItem.formatPrice(getTotal())));
+
         summary.append("========================================\n");
 
         return summary.toString();
@@ -130,7 +112,7 @@ public class Order {
 
     @Override
     public String toString() {
-        return String.format("Order #%d - Customer: %s - Total: Rs.%.2f",
-                orderId, customer.getName(), getTotal());
+        return String.format("Order #%d - Customer: %s - Total: %s",
+                orderId, customer.getName(), FoodItem.formatPrice(getTotal()));
     }
 }

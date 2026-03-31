@@ -1,43 +1,38 @@
+package com.foodapp.model;
+
 /**
- * Drink class extending FoodItem
- * INHERITANCE: Inherits from FoodItem
- * POLYMORPHISM: Overrides abstract methods with Drink-specific implementation
+ * Drink class extends FoodItem (Inheritance, Polymorphism)
+ * Represents a drink menu item.
  */
 public class Drink extends FoodItem {
-    private int volumeMl; // Volume in milliliters
-    private String type;  // e.g., "Soft Drink", "Juice", "Water"
+    private final int volumeMl; // Volume in milliliters
+    private final String type;  // Drink type (e.g., Soft Drink, Juice, Water)
 
-    /**
-     * Constructor for Drink
-     */
+    // Constructor to initialize Drink object
     public Drink(int itemId, String name, double price, int volumeMl, String type) {
         super(itemId, name, price);
         this.volumeMl = volumeMl;
         this.type = type;
     }
 
-    // Getters for Drink-specific properties
+    // Get drink volume
     public int getVolumeMl() {
         return volumeMl;
     }
 
+    // Get drink type
     public String getType() {
         return type;
     }
 
-    /**
-     * POLYMORPHISM: Overrides abstract method from FoodItem
-     * Provides Drink-specific description
-     */
+    // Provides formatted description (method override)
     @Override
     public String getDescription() {
-        return String.format("Drink [%s] - %s (%dml) (Rs.%.2f)",
-                type, getName(), volumeMl, getPrice());
+        return String.format("[%d] Drink [%s] - %s (%dml) (%s)",
+                getItemId(), type, getName(), volumeMl, formatPrice(getPrice()));
     }
 
-    /**
-     * POLYMORPHISM: Overrides abstract validation method
-     */
+    // Validates drink data (method override)
     @Override
     public boolean isValid() {
         return getName() != null && !getName().isEmpty() &&
@@ -45,6 +40,7 @@ public class Drink extends FoodItem {
                 type != null && !type.isEmpty();
     }
 
+    // Custom string representation
     @Override
     public String toString() {
         return super.toString() + " | Volume: " + volumeMl + "ml | Type: " + type;

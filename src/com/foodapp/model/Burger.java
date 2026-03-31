@@ -1,43 +1,38 @@
+package com.foodapp.model;
+
 /**
- * Burger class extending FoodItem
- * INHERITANCE: Inherits from FoodItem
- * POLYMORPHISM: Overrides abstract methods with Burger-specific implementation
+ * Burger class extends FoodItem (Inheritance, Polymorphism)
+ * Represents a burger menu item.
  */
 public class Burger extends FoodItem {
-    private String type; // e.g., "Veggie", "Chicken", "Beef"
+    private final String type; // Burger type (e.g., Veggie, Chicken, Beef)
 
-    /**
-     * Constructor for Burger
-     */
+    // Constructor to initialize Burger object
     public Burger(int itemId, String name, double price, String type) {
         super(itemId, name, price);
         this.type = type;
     }
 
-    // Getter for Burger-specific property
+    // Returns burger type
     public String getType() {
         return type;
     }
 
-    /**
-     * POLYMORPHISM: Overrides abstract method from FoodItem
-     * Provides Burger-specific description
-     */
+    // Provides formatted description (method override)
     @Override
     public String getDescription() {
-        return String.format("Burger [%s] - %s (Rs.%.2f)",
-                type, getName(), getPrice());
+        return String.format("[%d] Burger [%s] - %s (%s)",
+                getItemId(), type, getName(), formatPrice(getPrice()));
     }
 
-    /**
-     * POLYMORPHISM: Overrides abstract validation method
-     */
+    // Validates burger data (method override)
     @Override
     public boolean isValid() {
         return getName() != null && !getName().isEmpty() &&
                 getPrice() > 0 && type != null && !type.isEmpty();
     }
 
+    // Custom string representation
     @Override
     public String toString() {
         return super.toString() + " | Type: " + type;

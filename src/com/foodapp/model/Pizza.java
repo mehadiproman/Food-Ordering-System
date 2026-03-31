@@ -1,43 +1,38 @@
+package com.foodapp.model;
+
 /**
- * Pizza class extending FoodItem
- * INHERITANCE: Inherits from FoodItem
- * POLYMORPHISM: Overrides abstract methods with Pizza-specific implementation
+ * Pizza class extends FoodItem (Inheritance, Polymorphism)
+ * Represents a pizza menu item.
  */
 public class Pizza extends FoodItem {
-    private String size; // e.g., "Small", "Medium", "Large"
-    private int slices;
+    private final String size; // Pizza size (e.g., Small, Medium, Large)
+    private final int slices;
 
-    /**
-     * Constructor for Pizza
-     */
+    // Constructor to initialize Pizza object
     public Pizza(int itemId, String name, double price, String size, int slices) {
         super(itemId, name, price);
         this.size = size;
         this.slices = slices;
     }
 
-    // Getters for Pizza-specific properties
+    // Get pizza size
     public String getSize() {
         return size;
     }
 
+    // Get number of slices
     public int getSlices() {
         return slices;
     }
 
-    /**
-     * POLYMORPHISM: Overrides abstract method from FoodItem
-     * Provides Pizza-specific description
-     */
+    // Provides formatted description (method override)
     @Override
     public String getDescription() {
-        return String.format("Pizza [%s] - %s (%d slices) (Rs.%.2f)",
-                size, getName(), slices, getPrice());
+        return String.format("[%d] Pizza [%s] - %s (%d slices) (%s)",
+                getItemId(), size, getName(), slices, formatPrice(getPrice()));
     }
 
-    /**
-     * POLYMORPHISM: Overrides abstract validation method
-     */
+    // Validates pizza data (method override)
     @Override
     public boolean isValid() {
         return getName() != null && !getName().isEmpty() &&
@@ -45,6 +40,7 @@ public class Pizza extends FoodItem {
                 slices > 0;
     }
 
+    // Custom string representation
     @Override
     public String toString() {
         return super.toString() + " | Size: " + size + " | Slices: " + slices;

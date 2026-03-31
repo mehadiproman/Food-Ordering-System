@@ -1,25 +1,20 @@
+package com.foodapp.service;
+
+import com.foodapp.model.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Menu class managing all food items available in the system
- * ENCAPSULATION: Encapsulates the menu items with controlled access
- */
+// Menu class manages all food items (Encapsulation, Polymorphism)
 public class Menu {
     private List<FoodItem> items;
 
-    /**
-     * Constructor initializing the menu with predefined items
-     */
+    // Constructor initializes menu with predefined items
     public Menu() {
         this.items = new ArrayList<>();
         initializeMenu();
     }
 
-    /**
-     * Initializes menu with sample food items
-     * Demonstrates POLYMORPHISM: Adding different types of items to same list
-     */
+    // Adds sample food items to menu (demonstrates polymorphism)
     private void initializeMenu() {
         // Add Burgers
         items.add(new Burger(101, "Classic Burger", 250.0, "Beef"));
@@ -37,16 +32,12 @@ public class Menu {
         items.add(new Drink(303, "Bottled Water", 50.0, 500, "Water"));
     }
 
-    /**
-     * Returns all menu items
-     */
+    // Get all menu items
     public List<FoodItem> getItems() {
         return items;
     }
 
-    /**
-     * Searches for a food item by ID
-     */
+    // Find item by ID
     public FoodItem findItemById(int itemId) {
         return items.stream()
                 .filter(item -> item.getItemId() == itemId)
@@ -54,9 +45,7 @@ public class Menu {
                 .orElse(null);
     }
 
-    /**
-     * Displays the complete menu in a formatted way
-     */
+    // Display menu grouped by category
     public void displayMenu() {
         System.out.println("\n========================================");
         System.out.println("           AVAILABLE MENU ITEMS");
@@ -83,9 +72,7 @@ public class Menu {
         System.out.println("========================================\n");
     }
 
-    /**
-     * Returns count of items in menu
-     */
+    // Get total number of menu items
     public int getItemCount() {
         return items.size();
     }

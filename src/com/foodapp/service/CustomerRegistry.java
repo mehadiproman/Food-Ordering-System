@@ -1,35 +1,29 @@
+package com.foodapp.service;
+
+import com.foodapp.model.Customer;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * CustomerRegistry class managing customer registrations
- * ENCAPSULATION: Encapsulates customer storage and access
- */
+// CustomerRegistry manages customer data (Encapsulation)
 public class CustomerRegistry {
     private List<Customer> customers;
     private int nextCustomerId;
 
-    /**
-     * Constructor initializing the registry
-     */
+    // Constructor initializes registry and sample data
     public CustomerRegistry() {
         this.customers = new ArrayList<>();
         this.nextCustomerId = 1001;
         initializeSampleCustomers();
     }
 
-    /**
-     * Initializes registry with sample customers
-     */
+    // Adds predefined sample customers
     private void initializeSampleCustomers() {
         registerCustomer("Ahmed Khan", "ahmed@email.com", "03001234567", "Dhaka");
         registerCustomer("Fatima Ali", "fatima@email.com", "03009876543", "Chittagong");
         registerCustomer("Hassan Malik", "hassan@email.com", "03005555555", "Sylhet");
     }
 
-    /**
-     * Registers a new customer
-     */
+    // Registers a new customer with validation
     public Customer registerCustomer(String name, String email,
                                      String phoneNumber, String address) {
         Customer customer = new Customer(nextCustomerId, name, email, phoneNumber, address);
@@ -41,9 +35,7 @@ public class CustomerRegistry {
         return null;
     }
 
-    /**
-     * Finds customer by ID
-     */
+    // Find customer by ID
     public Customer findCustomerById(int customerId) {
         return customers.stream()
                 .filter(customer -> customer.getCustomerId() == customerId)
@@ -51,9 +43,7 @@ public class CustomerRegistry {
                 .orElse(null);
     }
 
-    /**
-     * Finds customer by name (case-insensitive)
-     */
+    // Find customer by name (case-insensitive)
     public Customer findCustomerByName(String name) {
         return customers.stream()
                 .filter(customer -> customer.getName().equalsIgnoreCase(name))
@@ -61,23 +51,17 @@ public class CustomerRegistry {
                 .orElse(null);
     }
 
-    /**
-     * Returns all registered customers
-     */
+    // Get all customers
     public List<Customer> getAllCustomers() {
         return customers;
     }
 
-    /**
-     * Checks if customer exists by ID
-     */
+    // Check if customer exists
     public boolean customerExists(int customerId) {
         return findCustomerById(customerId) != null;
     }
 
-    /**
-     * Displays all registered customers
-     */
+    // Display all registered customers
     public void displayAllCustomers() {
         System.out.println("\n========================================");
         System.out.println("      REGISTERED CUSTOMERS");

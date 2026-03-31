@@ -1,42 +1,38 @@
+package com.foodapp.model;
+
 /**
- * OrderItem class representing a food item with quantity in an order
- * ENCAPSULATION: Encapsulates food item and quantity information
+ * OrderItem class represents a food item with quantity (Encapsulation)
+ * Handles individual item calculations within an order.
  */
 public class OrderItem {
-    private FoodItem foodItem;
-    private int quantity;
+    private final FoodItem foodItem;
+    private final int quantity;
 
-    /**
-     * Constructor for OrderItem
-     */
+    // Constructor to initialize order item
     public OrderItem(FoodItem foodItem, int quantity) {
         this.foodItem = foodItem;
         this.quantity = quantity;
     }
 
-    // Getters
+    // Get food item
     public FoodItem getFoodItem() {
         return foodItem;
     }
 
+    // Get quantity
     public int getQuantity() {
         return quantity;
     }
 
-    /**
-     * Calculates subtotal for this order item
-     * Subtotal = Price * Quantity
-     */
+    // Calculate subtotal (price × quantity)
     public double getSubtotal() {
         return foodItem.getPrice() * quantity;
     }
 
-    /**
-     * Returns a detailed string representation of the order item
-     */
+    // String representation of order item
     @Override
     public String toString() {
-        return String.format("%s x %d = Rs.%.2f",
-                foodItem.getName(), quantity, getSubtotal());
+        return String.format("%s x %d = %s",
+                foodItem.getName(), quantity, FoodItem.formatPrice(getSubtotal()));
     }
 }
